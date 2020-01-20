@@ -8,7 +8,7 @@
 from scrapy import signals
 
 
-class TengxunSpiderMiddleware(object):
+class DouyuSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -56,7 +56,7 @@ class TengxunSpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-class TengxunDownloaderMiddleware(object):
+class DouyuDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
@@ -101,17 +101,3 @@ class TengxunDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
-
-
-from .user_agents import user_agents
-import random
-
-
-class RandomUserAgentMiddleware(object):
-    def process_request(self, request, spider):
-        request.headers["User-Agent"] = random.choice(user_agents)
-
-
-class ProxyMiddleware(object):
-    def process_request(self, request, spider):
-        request.meta['proxy'] = "http://180.167.162.166:8080"

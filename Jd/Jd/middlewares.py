@@ -8,7 +8,7 @@
 from scrapy import signals
 
 
-class TengxunSpiderMiddleware(object):
+class JdSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -56,7 +56,7 @@ class TengxunSpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-class TengxunDownloaderMiddleware(object):
+class JdDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
@@ -103,15 +103,17 @@ class TengxunDownloaderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-from .user_agents import user_agents
-import random
+from selenium import webdriver
+import time
+from selenium.webdriver.common.keys import Keys
 
+class seleniumMiddleware(object):
+    def __init__(self):
+        self.driver = webdriver.Chrome()
 
-class RandomUserAgentMiddleware(object):
     def process_request(self, request, spider):
-        request.headers["User-Agent"] = random.choice(user_agents)
-
-
-class ProxyMiddleware(object):
-    def process_request(self, request, spider):
-        request.meta['proxy'] = "http://180.167.162.166:8080"
+        self.driver.get(request.url)
+        self.driver.find_element_by_id("key").send_keys("爬虫")
+        self.driver.find_element_by_id("key").send_keys(Keys.ENTER)
+        time.sleep(4)
+        self.driver.save_screenshot("Jd.png")

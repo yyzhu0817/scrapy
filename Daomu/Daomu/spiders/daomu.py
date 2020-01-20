@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
+
 from ..items import DaomuItem
+
 
 class DaomuSpider(scrapy.Spider):
     name = 'daomu'
@@ -23,4 +25,3 @@ class DaomuSpider(scrapy.Spider):
             item["link"] = article.xpath('./a/@href').get()
 
             yield item
-        

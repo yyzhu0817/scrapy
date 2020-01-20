@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for Tengxun project
+# Scrapy settings for Douyu project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,13 +9,13 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'Tengxun'
+BOT_NAME = 'Douyu'
 
-SPIDER_MODULES = ['Tengxun.spiders']
-NEWSPIDER_MODULE = 'Tengxun.spiders'
+SPIDER_MODULES = ['Douyu.spiders']
+NEWSPIDER_MODULE = 'Douyu.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'Tengxun (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -39,7 +39,6 @@ ROBOTSTXT_OBEY = False
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
-    'User-Agent': 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; en) Opera 9.50',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'en',
 }
@@ -47,15 +46,14 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'Tengxun.middlewares.TengxunSpiderMiddleware': 543,
+#    'Douyu.middlewares.DouyuSpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-    'Tengxun.middlewares.RandomUserAgentMiddleware': 543,
-    'Tengxun.middlewares.ProxyMiddleware': 250,
-}
+# DOWNLOADER_MIDDLEWARES = {
+#    'Douyu.middlewares.DouyuDownloaderMiddleware': 543,
+# }
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -65,9 +63,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'Tengxun.pipelines.TengxunPipeline': 300,
-# }
+ITEM_PIPELINES = {
+    'Douyu.pipelines.DouyuImagePipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -89,3 +87,4 @@ DOWNLOADER_MIDDLEWARES = {
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+IMAGES_STORE = '/Users/yyzhu/Pictures/DouyuPhoto/'

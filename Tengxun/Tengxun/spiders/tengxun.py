@@ -11,7 +11,6 @@ def parseHtml(response):
         item = TengxunItem()
         item['zhName'] = base.xpath('./td[1]/a/text()').extract()[0]
         item['zhLink'] = base.xpath('./td[1]/a/@href').extract()[0]
-
         item['zhType'] = base.xpath('./td[2]/text()').extract()
         if item['zhType']:
             item['zhType'] = item['zhType'][0]
@@ -31,11 +30,11 @@ class TengxunSpider(scrapy.Spider):
     # 定义基准url,方便下面做url拼接
     # url = "https://hr.tencent.com/position.php?&start="
     url = "https://careers.tencent.com/search.html?index="
-    offset = 1
+    offset = 0
     # 只是最开始的url
     start_urls = [url + str(offset)]
 
     def parse(self, response):
         # 把293页的URL都给引擎,引擎给调度器去入队列,再给下载器
-        for i in range(0, 2921, 10):
+        for i in range(0, 430):  # i:页数
             yield scrapy.Request(self.url + str(i), callback=parseHtml)
